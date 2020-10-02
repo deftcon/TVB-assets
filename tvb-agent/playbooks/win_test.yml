@@ -1,0 +1,6 @@
+---
+  - hosts: win
+    roles:
+      - clean-tetration-sensor-win
+      - install-tetration-sensor-ps-win
+      

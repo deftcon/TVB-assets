@@ -1,0 +1,10 @@
+---
+  - hosts: centos
+    become: true
+    roles:
+      - install-tetration-sensor-centos
+
+  - hosts: win
+    roles:
+      - install-tetration-sensor-win
+      

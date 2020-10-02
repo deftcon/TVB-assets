@@ -1,0 +1,10 @@
+---
+  - hosts: centos
+    become: true
+    roles:
+      - clean-tetration-sensor-centos
+
+  - hosts: win
+    roles:
+      - clean-tetration-sensor-win
+      

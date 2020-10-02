@@ -1,0 +1,36 @@
+---
+- name: Configure ASAv
+  hosts: asa
+  gather_facts: no
+
+  tasks:
+    - name: Configure webvpn commands on ASA
+      asa_config:
+        lines:
+          - anyconnect image disk0:/anyconnect-win-4.8.02045-webdeploy-k9.pkg 1 regex "Windows"
+          - anyconnect image disk0:/anyconnect-linux64-4.8.02045-webdeploy-k9.pkg 2 regex "Linux"
+          - anyconnect profiles HOL-LAB-PROFILE disk0:/anyconnect-profile.xml
+        parents:
+          - webvpn
+      connection: network_cli
+
+    - name: Configure tunnel-group commands on ASA
+      asa_config:
+        lines:
+          - vpn-tunnel-protocol ssl-client
+          - split-tunnel-policy tunnelspecified
+          - split-tunnel-network-list value LAB-LIST
+        parents:
+          - group-policy LAB-PROFILE attributes
+      connection: network_cli
+
+    - name: Configure additional webvpn command
+      asa_config:
+        lines:
+          - anyconnect module value none
+          - anyconnect profiles value HOL-LAB-PROFILE type user
+          - wr
+        parents:
+          - group-policy LAB-PROFILE attributes
+          - webvpn
+      connection: network-cli

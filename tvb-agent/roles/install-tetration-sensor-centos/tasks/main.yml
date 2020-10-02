@@ -1,0 +1,25 @@
+---
+- name: Install Required Packages
+  yum: 
+    name:
+      - redhat-lsb-core
+      - dmidecode
+      - ipset
+      - unzip
+      - lsof
+    state: present
+
+- name: Copy Tetration Sensor RPM File
+  copy: src={{ linux_sensor_file }} dest=/tmp/tet-sensor.rpm
+
+- name: Install Tetration Sensor RPM
+  yum: name=/tmp/tet-sensor.rpm state=present
+
+- name: Copy User Config File
+  template: src=user.cfg.j2 dest=/usr/local/tet/user.cfg mode=0644
+
+- name: Start and Enable Tetration Sensor Service
+  service: name=tet-sensor state=restarted enabled=yes
+
+- name: Clean Up Temp Files
+  file: path=/tmp/tet-sensor.rpm state=absent

@@ -1,0 +1,9 @@
+---
+- name: Remove Tetration Sensor
+  yum: name=tet-sensor-site state=absent
+
+- name: Clean RPM Packages
+  command: yum remove '*tet-*' -y
+
+- name: Remove Tetration Sensor Directory
+  file: state=absent path=/usr/local/tet

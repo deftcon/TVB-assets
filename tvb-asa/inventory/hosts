@@ -1,0 +1,8 @@
+[asa]
+127.0.0.1
+
+[asa:vars]
+ansible_user=admin
+ansible_password=tet12345678
+ansible_connection=network_cli
+ansible_network_os=asa

@@ -1,0 +1,22 @@
+---
+- name: Install Required Packages
+  yum: 
+    name:
+      - redhat-lsb-core
+      - dmidecode
+      - ipset
+      - unzip
+      - lsof
+    state: present
+
+- name: Copy Tetration Sensor Shell Script File
+  copy: src={{ linux_sensor_shell_script }} dest=/tmp/tet-install.sh mode=0755
+
+- name: Install Tetration Sensor With Shell Script
+  command: /bin/bash /tmp/tet-install.sh
+
+- name: Start and Enable Tetration Sensor Service
+  service: name=tet-sensor state=restarted enabled=yes
+
+- name: Clean Up Temp Files
+  file: path=/tmp/tet-install.sh state=absent

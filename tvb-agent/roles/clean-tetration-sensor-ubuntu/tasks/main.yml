@@ -1,0 +1,7 @@
+---
+- name: Clean RPM Packages
+  command: rpm -e tet-sensor
+  ignore_errors: yes
+
+- name: Remove Tetration Sensor Directory
+  file: state=absent path=/usr/local/tet

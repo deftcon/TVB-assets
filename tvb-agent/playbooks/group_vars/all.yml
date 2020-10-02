@@ -1,0 +1,7 @@
+---
+linux_sensor_file: /home/ciscolab/tet-sensor.rpm
+win_sensor_file: /home/ciscolab/tet-sensor.zip
+activation_key: your-activation-key
+
+linux_sensor_shell_script: /home/ciscolab/tet-linux.sh
+win_sensor_ps_script: /home/ciscolab/tet-win.ps1

@@ -1,1 +1,1 @@
-# TVB-assets
+# tvb-resources
