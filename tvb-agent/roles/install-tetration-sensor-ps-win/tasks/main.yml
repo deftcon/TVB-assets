@@ -35,7 +35,7 @@
 # This task checks to make sure the service is running
 - name: Wait for service to start
   win_wait_for_process:
-    process_name_exact: 'WindowsTetEngine'
+    process_name_exact: 'Cisco Tetration Enforcement'
     state: present
     timeout: 30
     sleep: 15
