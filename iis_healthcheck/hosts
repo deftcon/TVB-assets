@@ -1,0 +1,10 @@
+[iis]
+3.131.162.230
+
+[iis:vars]
+ansible_user=HOL\ciscolab
+ansible_password=tet123$$!
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore
+validate_certs=false

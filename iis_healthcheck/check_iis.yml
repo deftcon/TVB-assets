@@ -1,0 +1,22 @@
+---
+- name: "CHECK IIS WEB SERVER AND RESTART SERVICE ON FAILURE"  
+  hosts: iis
+  gather_facts: no
+
+  tasks:
+    - name: "CHECK STATUS OF IIS WEB SERVER"
+      uri: 
+        url: "http://{{ inventory_hostname }}"
+        validate_certs: false
+      register: result
+      delegate_to: localhost
+      ignore_errors: true
+
+    - name: "DEBUG RESULT"
+      debug:
+        var: result.status
+
+    - name: "RESTART IIS SERVICE"
+      win_service: name="World Wide Web Publishing Service" state=restarted start_mode=auto
+      when: not result.status == "200"
+      
